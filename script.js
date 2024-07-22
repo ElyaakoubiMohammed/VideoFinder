@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyCGf08H0-udYPY20SxbkMQNXIx9mdnaCNk';
+const API_KEY = 'AIz';
 let nextPageToken = '';
 
 function searchVideos() {
