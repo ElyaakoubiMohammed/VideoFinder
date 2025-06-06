@@ -1,22 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Search</title>
+    <title>VideoFinder - Discover Amazing Content</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
-    <div class="container">
-        <input type="text" id="search-bar" placeholder="Search for videos...">
-        <button onclick="searchVideos()">Search</button>
+    <!-- Background Elements -->
+    <div class="bg-gradient"></div>
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
     </div>
-    <div id="video-container"></div>
-    <button id="load-more" onclick="loadMoreVideos()" style="display: none;">Load More</button>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-play-circle"></i>
+                <span>VideoFinder</span>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active">Discover</a>
+                <a href="#" class="nav-link">Trending</a>
+                <a href="#" class="nav-link">Categories</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Discover Amazing
+                    <span class="gradient-text">Videos</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Search through millions of videos and find exactly what you're looking for
+                </p>
+                
+                <!-- Search Container -->
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input 
+                            type="text" 
+                            id="search-bar" 
+                            placeholder="What would you like to watch today?"
+                            autocomplete="off"
+                        >
+                        <button class="search-btn" onclick="searchVideos()">
+                            <span class="btn-text">Search</span>
+                            <i class="fas fa-arrow-right btn-icon"></i>
+                        </button>
+                    </div>
+                    <div class="search-suggestions">
+                        <span class="suggestion-label">Popular:</span>
+                        <button class="suggestion-tag" onclick="quickSearch('music')">Music</button>
+                        <button class="suggestion-tag" onclick="quickSearch('gaming')">Gaming</button>
+                        <button class="suggestion-tag" onclick="quickSearch('tutorials')">Tutorials</button>
+                        <button class="suggestion-tag" onclick="quickSearch('comedy')">Comedy</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="results-section">
+            <div class="results-header">
+                <h2 class="results-title">Search Results</h2>
+                <div class="results-count" id="results-count"></div>
+            </div>
+            
+            <!-- Loading Animation -->
+            <div class="loading-container" id="loading-container">
+                <div class="loading-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <p class="loading-text">Searching for amazing videos...</p>
+            </div>
+
+            <!-- Video Grid -->
+            <div class="video-grid" id="video-container"></div>
+            
+            <!-- Load More Button -->
+            <div class="load-more-container">
+                <button class="load-more-btn" id="load-more" onclick="loadMoreVideos()">
+                    <span class="btn-text">Load More Videos</span>
+                    <i class="fas fa-chevron-down btn-icon"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 VideoFinder. Powered by YouTube Data API</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
-
 </html>
