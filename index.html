@@ -58,38 +58,10 @@
                     <i class="fas fa-bell"></i>
                     <span class="notification-badge">3</span>
                 </button>
-                <div class="user-menu">
-                    <button class="user-avatar" onclick="toggleUserMenu()">
-                        <img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=1" alt="User Avatar">
-                    </button>
-                    <div class="user-dropdown" id="user-dropdown">
-                        <div class="user-info">
-                            <img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=1" alt="User">
-                            <div>
-                                <div class="user-name">John Doe</div>
-                                <div class="user-email">john@example.com</div>
-                            </div>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-user"></i>
-                            Your Channel
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-history"></i>
-                            Watch History
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-cog"></i>
-                            Settings
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Sign Out
-                        </a>
-                    </div>
-                </div>
+                <button class="upload-btn" onclick="showUploadModal()">
+                    <i class="fas fa-plus"></i>
+                    <span>Create</span>
+                </button>
             </div>
         </div>
     </header>
@@ -357,28 +329,28 @@
             <div class="footer-section">
                 <h4>Explore</h4>
                 <ul>
-                    <li><a href="#">Trending</a></li>
-                    <li><a href="#">Music</a></li>
-                    <li><a href="#">Gaming</a></li>
-                    <li><a href="#">News</a></li>
+                    <li><a href="#" onclick="showTrending()">Trending</a></li>
+                    <li><a href="#" onclick="exploreCategory('music')">Music</a></li>
+                    <li><a href="#" onclick="exploreCategory('gaming')">Gaming</a></li>
+                    <li><a href="#" onclick="exploreCategory('news')">News</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4>Support</h4>
                 <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Community Guidelines</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#" onclick="showHelp()">Help Center</a></li>
+                    <li><a href="#" onclick="showGuidelines()">Community Guidelines</a></li>
+                    <li><a href="#" onclick="showPrivacy()">Privacy Policy</a></li>
+                    <li><a href="#" onclick="showTerms()">Terms of Service</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4>Creators</h4>
                 <ul>
-                    <li><a href="#">Creator Hub</a></li>
-                    <li><a href="#">Analytics</a></li>
-                    <li><a href="#">Monetization</a></li>
-                    <li><a href="#">Resources</a></li>
+                    <li><a href="#" onclick="showCreatorHub()">Creator Hub</a></li>
+                    <li><a href="#" onclick="showAnalytics()">Analytics</a></li>
+                    <li><a href="#" onclick="showMonetization()">Monetization</a></li>
+                    <li><a href="#" onclick="showResources()">Resources</a></li>
                 </ul>
             </div>
         </div>
