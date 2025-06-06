@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoFinder - Discover Amazing Content</title>
+    <title>VidStream - Your Premium Video Platform</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -16,67 +16,235 @@
         <div class="shape shape-2"></div>
         <div class="shape shape-3"></div>
         <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+        <div class="shape shape-6"></div>
     </div>
 
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <div class="logo">
-                <i class="fas fa-play-circle"></i>
-                <span>VideoFinder</span>
+            <div class="header-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <i class="fas fa-play-circle"></i>
+                    <span>VidStream</span>
+                </div>
             </div>
-            <nav class="nav">
-                <a href="#" class="nav-link active">Discover</a>
-                <a href="#" class="nav-link">Trending</a>
-                <a href="#" class="nav-link">Categories</a>
-            </nav>
+            
+            <div class="header-center">
+                <div class="search-wrapper">
+                    <input 
+                        type="text" 
+                        id="search-bar" 
+                        placeholder="Search videos, channels, playlists..."
+                        autocomplete="off"
+                    >
+                    <button class="search-btn" onclick="searchVideos()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="voice-search-btn" onclick="startVoiceSearch()">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="notification-btn" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-menu">
+                    <button class="user-avatar" onclick="toggleUserMenu()">
+                        <img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=1" alt="User Avatar">
+                    </button>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="user-info">
+                            <img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=1" alt="User">
+                            <div>
+                                <div class="user-name">John Doe</div>
+                                <div class="user-email">john@example.com</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            Your Channel
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-history"></i>
+                            Watch History
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Sign Out
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <a href="#" class="nav-item active" onclick="showHome()">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showTrending()">
+                        <i class="fas fa-fire"></i>
+                        <span>Trending</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showSubscriptions()">
+                        <i class="fas fa-users"></i>
+                        <span>Subscriptions</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Library</div>
+                    <a href="#" class="nav-item" onclick="showHistory()">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showWatchLater()">
+                        <i class="fas fa-clock"></i>
+                        <span>Watch Later</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showLikedVideos()">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span>Liked Videos</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showPlaylists()">
+                        <i class="fas fa-list"></i>
+                        <span>Playlists</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Explore</div>
+                    <a href="#" class="nav-item" onclick="exploreCategory('music')">
+                        <i class="fas fa-music"></i>
+                        <span>Music</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="exploreCategory('gaming')">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Gaming</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="exploreCategory('news')">
+                        <i class="fas fa-newspaper"></i>
+                        <span>News</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="exploreCategory('sports')">
+                        <i class="fas fa-football-ball"></i>
+                        <span>Sports</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="exploreCategory('education')">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Learning</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </aside>
+
     <!-- Main Content -->
-    <main class="main">
+    <main class="main" id="main-content">
         <!-- Hero Section -->
-        <section class="hero">
+        <section class="hero" id="hero-section">
             <div class="hero-content">
                 <h1 class="hero-title">
                     Discover Amazing
-                    <span class="gradient-text">Videos</span>
+                    <span class="gradient-text">Content</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Search through millions of videos and find exactly what you're looking for
+                    Watch millions of videos, discover new creators, and explore trending content
                 </p>
                 
-                <!-- Search Container -->
-                <div class="search-container">
-                    <div class="search-wrapper">
-                        <i class="fas fa-search search-icon"></i>
-                        <input 
-                            type="text" 
-                            id="search-bar" 
-                            placeholder="What would you like to watch today?"
-                            autocomplete="off"
-                        >
-                        <button class="search-btn" onclick="searchVideos()">
-                            <span class="btn-text">Search</span>
-                            <i class="fas fa-arrow-right btn-icon"></i>
-                        </button>
-                    </div>
-                    <div class="search-suggestions">
-                        <span class="suggestion-label">Popular:</span>
-                        <button class="suggestion-tag" onclick="quickSearch('music')">Music</button>
-                        <button class="suggestion-tag" onclick="quickSearch('gaming')">Gaming</button>
-                        <button class="suggestion-tag" onclick="quickSearch('tutorials')">Tutorials</button>
-                        <button class="suggestion-tag" onclick="quickSearch('comedy')">Comedy</button>
-                    </div>
+                <!-- Quick Categories -->
+                <div class="quick-categories">
+                    <button class="category-chip active" onclick="quickSearch('trending')">
+                        <i class="fas fa-fire"></i>
+                        Trending
+                    </button>
+                    <button class="category-chip" onclick="quickSearch('music')">
+                        <i class="fas fa-music"></i>
+                        Music
+                    </button>
+                    <button class="category-chip" onclick="quickSearch('gaming')">
+                        <i class="fas fa-gamepad"></i>
+                        Gaming
+                    </button>
+                    <button class="category-chip" onclick="quickSearch('comedy')">
+                        <i class="fas fa-laugh"></i>
+                        Comedy
+                    </button>
+                    <button class="category-chip" onclick="quickSearch('education')">
+                        <i class="fas fa-graduation-cap"></i>
+                        Education
+                    </button>
+                    <button class="category-chip" onclick="quickSearch('technology')">
+                        <i class="fas fa-microchip"></i>
+                        Tech
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- Results Section -->
-        <section class="results-section" id="results-section">
-            <div class="results-header">
-                <h2 class="results-title">Search Results</h2>
-                <div class="results-count" id="results-count"></div>
+        <!-- Content Sections -->
+        <section class="content-section" id="content-section">
+            <!-- Filter Bar -->
+            <div class="filter-bar" id="filter-bar">
+                <div class="filter-chips">
+                    <button class="filter-chip active" onclick="filterContent('all')">All</button>
+                    <button class="filter-chip" onclick="filterContent('today')">Today</button>
+                    <button class="filter-chip" onclick="filterContent('week')">This Week</button>
+                    <button class="filter-chip" onclick="filterContent('month')">This Month</button>
+                    <button class="filter-chip" onclick="filterContent('duration')">
+                        <i class="fas fa-clock"></i>
+                        Duration
+                    </button>
+                    <button class="filter-chip" onclick="filterContent('quality')">
+                        <i class="fas fa-hd-video"></i>
+                        Quality
+                    </button>
+                </div>
+                <div class="view-options">
+                    <button class="view-btn active" onclick="setViewMode('grid')" title="Grid View">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" onclick="setViewMode('list')" title="List View">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Header -->
+            <div class="results-header" id="results-header">
+                <h2 class="results-title">Trending Videos</h2>
+                <div class="results-meta">
+                    <span class="results-count" id="results-count"></span>
+                    <div class="sort-options">
+                        <select class="sort-select" onchange="sortResults(this.value)">
+                            <option value="relevance">Relevance</option>
+                            <option value="date">Upload Date</option>
+                            <option value="viewCount">View Count</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             
             <!-- Loading Animation -->
@@ -86,7 +254,7 @@
                     <div class="spinner-ring"></div>
                     <div class="spinner-ring"></div>
                 </div>
-                <p class="loading-text">Searching for amazing videos...</p>
+                <p class="loading-text">Loading amazing content...</p>
             </div>
 
             <!-- Video Grid -->
@@ -102,10 +270,120 @@
         </section>
     </main>
 
+    <!-- Video Player Modal -->
+    <div class="video-modal" id="video-modal">
+        <div class="modal-backdrop" onclick="closeVideoModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeVideoModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="video-player-container">
+                <iframe id="video-player" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-details">
+                <h3 class="video-title-modal" id="video-title-modal"></h3>
+                <div class="video-actions">
+                    <button class="action-btn like-btn" onclick="toggleLike()">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span>Like</span>
+                    </button>
+                    <button class="action-btn" onclick="toggleDislike()">
+                        <i class="fas fa-thumbs-down"></i>
+                        <span>Dislike</span>
+                    </button>
+                    <button class="action-btn" onclick="shareVideo()">
+                        <i class="fas fa-share"></i>
+                        <span>Share</span>
+                    </button>
+                    <button class="action-btn" onclick="saveToPlaylist()">
+                        <i class="fas fa-plus"></i>
+                        <span>Save</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Panel -->
+    <div class="notifications-panel" id="notifications-panel">
+        <div class="notifications-header">
+            <h3>Notifications</h3>
+            <button class="mark-all-read" onclick="markAllRead()">Mark all as read</button>
+        </div>
+        <div class="notifications-list">
+            <div class="notification-item unread">
+                <div class="notification-avatar">
+                    <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=1" alt="Channel">
+                </div>
+                <div class="notification-content">
+                    <p><strong>TechReview</strong> uploaded a new video</p>
+                    <span class="notification-time">2 hours ago</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-avatar">
+                    <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=1" alt="Channel">
+                </div>
+                <div class="notification-content">
+                    <p><strong>MusicWorld</strong> is live now</p>
+                    <span class="notification-time">5 hours ago</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-avatar">
+                    <img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=1" alt="Channel">
+                </div>
+                <div class="notification-content">
+                    <p><strong>GameZone</strong> uploaded 3 new videos</p>
+                    <span class="notification-time">1 day ago</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2025 VideoFinder. Powered by YouTube Data API</p>
+            <div class="footer-section">
+                <h4>VidStream</h4>
+                <p>Your premium video streaming platform with the best content from around the world.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#">Trending</a></li>
+                    <li><a href="#">Music</a></li>
+                    <li><a href="#">Gaming</a></li>
+                    <li><a href="#">News</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Community Guidelines</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Creators</h4>
+                <ul>
+                    <li><a href="#">Creator Hub</a></li>
+                    <li><a href="#">Analytics</a></li>
+                    <li><a href="#">Monetization</a></li>
+                    <li><a href="#">Resources</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 VidStream. All rights reserved. Powered by YouTube Data API</p>
         </div>
     </footer>
 
