@@ -1,4 +1,4 @@
-const API_KEY = 'AIz';
+const API_KEY = 'YOUR_YOUTUBE_API_KEY_HERE'; // Replace with your actual YouTube Data API v3 key
 let nextPageToken = '';
 let currentQuery = '';
 let isLoading = false;
@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeApp() {
+    // Check if API key is configured
+    if (API_KEY === 'YOUR_YOUTUBE_API_KEY_HERE' || !API_KEY || API_KEY.length < 10) {
+        showApiKeyError();
+        return;
+    }
+
     // Add event listeners
     searchBar.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
@@ -37,6 +43,81 @@ function initializeApp() {
     window.addEventListener('scroll', handleScroll);
 }
 
+function showApiKeyError() {
+    const container = document.getElementById('video-container') || document.body;
+    container.innerHTML = `
+        <div class="api-key-error">
+            <div class="error-icon">
+                <i class="fas fa-key"></i>
+            </div>
+            <h3>YouTube API Key Required</h3>
+            <p>To use VideoFinder, you need to configure a valid YouTube Data API v3 key.</p>
+            <div class="setup-steps">
+                <h4>Setup Instructions:</h4>
+                <ol>
+                    <li>Go to the <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                    <li>Create a new project or select an existing one</li>
+                    <li>Enable the YouTube Data API v3</li>
+                    <li>Create credentials (API Key)</li>
+                    <li>Copy the API key and replace 'YOUR_YOUTUBE_API_KEY_HERE' in script.js</li>
+                </ol>
+            </div>
+        </div>
+    `;
+    
+    // Add styles for API key error
+    const style = document.createElement('style');
+    style.textContent = `
+        .api-key-error {
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-secondary, #666);
+        }
+        .api-key-error .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--warning-color, #f59e0b);
+        }
+        .api-key-error h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary, #333);
+        }
+        .api-key-error p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        .setup-steps {
+            text-align: left;
+            background: var(--bg-secondary, #f8f9fa);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+        .setup-steps h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary, #333);
+        }
+        .setup-steps ol {
+            padding-left: 1.5rem;
+        }
+        .setup-steps li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        .setup-steps a {
+            color: var(--primary-color, #3b82f6);
+            text-decoration: none;
+        }
+        .setup-steps a:hover {
+            text-decoration: underline;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
 function handleScroll() {
     const header = document.querySelector('.header');
     if (window.scrollY > 100) {
@@ -51,6 +132,12 @@ function handleScroll() {
 function searchVideos() {
     const query = searchBar.value.trim();
     if (!query || isLoading) return;
+
+    // Check API key again before making request
+    if (API_KEY === 'YOUR_YOUTUBE_API_KEY_HERE' || !API_KEY || API_KEY.length < 10) {
+        showApiKeyError();
+        return;
+    }
 
     currentQuery = query;
     nextPageToken = '';
@@ -74,7 +161,13 @@ function fetchVideos(url) {
     fetch(url)
         .then(response => {
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                if (response.status === 400) {
+                    throw new Error('Invalid API request. Please check your YouTube API key.');
+                } else if (response.status === 403) {
+                    throw new Error('API quota exceeded or invalid API key. Please check your YouTube API key and quota limits.');
+                } else {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
             }
             return response.json();
         })
@@ -87,7 +180,7 @@ function fetchVideos(url) {
         .catch(error => {
             console.error('Error fetching videos:', error);
             hideLoading();
-            showError('Failed to fetch videos. Please check your API key and try again.');
+            showError(error.message || 'Failed to fetch videos. Please check your API key and try again.');
         })
         .finally(() => {
             isLoading = false;
